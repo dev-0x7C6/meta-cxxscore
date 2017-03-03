@@ -1,0 +1,11 @@
+[Unit]
+Description=Benchmark
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/cxxbench
+User=root
+Restart=on-failure
+
+[Install]
+WantedBy=basic.target
