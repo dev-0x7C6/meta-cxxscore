@@ -10,14 +10,7 @@ CXXBENCH_SYSTEM_TUNE_FLAGS ?= ""
 CXXBENCH_DEFAULT_FLAGS ?= "-std=c++14 -O2"
 
 EXTRA_OECMAKE += " -DCMAKE_BUILD_TYPE=Release"
+EXTRA_OECMAKE += " -DCXXBENCH_BINARY_NAME='${PN}'"
 EXTRA_OECMAKE += " -DCMAKE_CXX_FLAGS_RELEASE='${CXXBENCH_SYSTEM_TUNE_FLAGS} ${CXXBENCH_DEFAULT_FLAGS} -DNDEBUG'"
 
 inherit cmake
-
-do_patch() {
-   pushd ${S}
-   git checkout -- "CMakeLists.txt"
-   sed -e "s/cxxbench/${PN}/g" "CMakeLists.txt" > "CMakeLists.txt.bak"
-   mv -f "CMakeLists.txt.bak" "CMakeLists.txt"
-   popd
-}
